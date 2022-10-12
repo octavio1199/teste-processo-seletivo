@@ -1,4 +1,4 @@
-# Desafio Processo Seletivo - *Info Sistemas*
+# Desafio Processo Seletivo - *CRUD de Veículos*
 
 Este repositório contém o desafio do processo seletivo da Info-Sistemas.
 
