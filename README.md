@@ -38,3 +38,9 @@ Os principais pacotes utilizados nesse projeto são:
 - http-status-codes.
 
 Para o armazenamento de dados foi utilizado o banco MySQL.
+
+
+## Documentação no Swagger
+
+Para acessar, após inicializar o servidor, acessar `http://localhost:3000/docs`
+
