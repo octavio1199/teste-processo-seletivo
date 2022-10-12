@@ -1,0 +1,10 @@
+.env
+.idea/
+.vscode/
+coverage
+dist/
+node_modules/
+tmp/
+temp/
+.DS_Store
+package-lock.json

@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2021",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "incremental": true,
+    "resolveJsonModule": true,
+    "strict": false,
+    "rootDir": "./",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+  },
+  "exclude": ["node_modules", "dist", "./exemples/**/*"],
+  "include": ["./**/*.ts"]
+}

@@ -1,0 +1,5 @@
+{
+  "extension": ["ts"],
+  "package": "./package.json",
+  "watch-files": ["lib/**/*.ts", "test/**/*.ts"]
+}

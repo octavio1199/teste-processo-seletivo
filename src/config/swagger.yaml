@@ -1,0 +1,326 @@
+openapi: 3.0.0
+info:
+  title: API de Veículos - Desafio Info Sistemas
+  description: Este swagger provê os serviços de API para a plataforma de veículos da Info Sistemas.
+  version: 1.0.0
+  contact: {}
+paths:
+  /veiculos:
+    post:
+      operationId: VeiculoController_cadastrar
+      summary: Cadastra um novo veículos
+      description: Nesta rota, o usuário poderá cadastrar um novo veículo
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VeiculoCadastroRequest'
+      responses:
+        '201':
+          description: 'CREATED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Veiculo'
+        '500':
+          description: 'Erro'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroInternoResponse'
+      tags:
+        - Veiculos
+    get:
+      operationId: VeiculoController_listar
+      summary: Lista os veículos
+      description: Nesta rota, o usuário poderá visualizar todos os veículos
+      parameters: []
+      responses:
+        '200':
+          description: 'OK'
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VeiculoListResponse'
+        '500':
+          description: 'Erro'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroInternoResponse'
+      tags:
+        - Veiculos
+  /veiculos/marcas/{marca}:
+    get:
+      operationId: VeiculoController_listarPorMarca
+      summary: Lista os veículos por Marca
+      description: Nesta rota, o usuário poderá visualizar todos os veículos da Marca procurada
+      parameters:
+        - name: marca
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'OK'
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VeiculoListResponse'
+        '500':
+          description: 'Erro'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroInternoResponse'
+      tags:
+        - Veiculos
+  /veiculos/{id}:
+    get:
+      operationId: VeiculoController_buscar
+      summary: Retorna os detalhes de um veículo
+      description: Nesta rota, o usuário poderá visualizar os detalhes de um veículo
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200': 
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Veiculo'
+        '404':
+          description: 'NOT FOUND'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroGenericoResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroInternoResponse'
+      tags:
+        - Veiculos
+    patch:
+      operationId: VeiculoController_atualizar
+      summary: Atualiza um Veiculo
+      description: Nesta rota, o usuário poderá atualizar as informações de um veículo.
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VeiculoUpdateRequest'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Veiculo'
+        '400':
+          description: 'BAD REQUEST'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroGenericoResponse'
+        '409':
+          description: 'CONFLICT'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroGenericoResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroInternoResponse'
+      tags:
+        - Veiculos
+    delete:
+      operationId: VeiculoController_deletar
+      summary: Deleta um Veiculo
+      description: Nesta rota, o usuário poderá deletar um veículo.
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Veiculo'
+        '400':
+          description: 'BAD REQUEST'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroGenericoResponse'
+        '409':
+          description: 'CONFLICT'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroGenericoResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroInternoResponse'
+      tags:
+        - Veiculos
+servers: []
+components:
+  schemas:
+    Veiculo:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        placa:
+          type: string
+          example: 'HKO-8375'
+        chassi:
+          type: string
+          example: '9BG116GW04C400001'
+        renavam:
+          type: string
+          example: '01234567891'
+        marca:
+          type: string
+          example: 'Honda'
+        modelo:
+          type: string
+          example: 'Civic'
+        ano:
+          type: number
+          example: 2020
+        createdAt:
+          type: string
+          format: date
+        updatedAt:
+          type: string
+          format: date
+    VeiculoCadastroRequest:
+      type: object
+      properties:
+        placa:
+          type: string
+          example: 'HKO-8375'
+        chassi:
+          type: string
+          example: '9BG116GW04C400001'
+        renavam:
+          type: string
+          example: '01234567891'
+        marca:
+          type: string
+          example: 'Honda'
+        modelo:
+          type: string
+          example: 'Civic'
+        ano:
+          type: number
+          example: 2020
+          format: date 
+      required:
+        - placa
+        - chassi
+        - renavam
+        - marca
+        - modelo
+        - ano
+    VeiculoUpdateRequest:
+      type: object
+      properties:
+        placa:
+          type: string
+          example: 'HKO-8375'
+        chassi:
+          type: string
+          example: '9BG116GW04C400001'
+        renavam:
+          type: string
+          example: '01234567891'
+        marca:
+          type: string
+          example: 'Honda'
+        modelo:
+          type: string
+          example: 'Civic'
+        ano:
+          type: number
+          example: 2020
+          format: date 
+    VeiculoCadastroResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        placa:
+          type: string
+          example: 'HKO-8375'
+        chassi:
+          type: string
+          example: '9BG116GW04C400001'
+        renavam:
+          type: string
+          example: '01234567891'
+        marca:
+          type: string
+          example: 'Honda'
+        modelo:
+          type: string
+          example: 'Civic'
+        ano:
+          type: number
+          example: 2020
+        createdAt:
+          type: string
+          format: date
+    VeiculoListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Veiculo'
+    ErroInternoResponse:
+      type: object
+      properties:
+        error:
+          type: string
+    ErroGenericoResponse:
+      type: object
+      properties:
+        name:
+          type: string
+        httpStatus:
+          type: number
+
